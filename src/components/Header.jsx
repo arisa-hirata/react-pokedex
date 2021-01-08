@@ -11,13 +11,14 @@ const Header = () => {
           height: 60,
           justifyContent: 'center',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          flexDirection: 'row'
         }}>
         <a
           href="/"
           className="navbar-brand col-sm-3 col-md-2 mr-0 align-items-center"
         >
-          <img src={pokeball} style={{width: 40}}/>
+          <img src={pokeball} style={{ width: 40 }} />
         </a>
       </nav>
     </div>
