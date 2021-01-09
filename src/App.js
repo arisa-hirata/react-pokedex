@@ -73,81 +73,83 @@ function App() {
 
         return (
           <div className="pokemon-container">
-            <Card style={{ width: 500, height: 500 }}>
+            <Card
+              style={{
+                width: "70%",
+                maxWidth: 1000,
+                minWidth: 500,
+                height: 500
+              }}>
               <CardHeader
                 subheader= {data.id}
                 title={data.name}
                 // subheader={}
               />
-              <div>
-                Type: &nbsp;
-                {data.types.map(type => (
-                  <span key={type}>{type.type.name}</span>
-                ))}
-              </div>
               <div className="pokemon-data">
 
                 <div className="basic-data">
                   <div className="image-container">
                      <img className="pokemon-image" src={imageUrl} />
                   </div>
-                  <div className="status-container">
-                    <div className="status">
-                      <div>HP: </div>
-                      <div>{data.stats[0].base_stat}</div>
-                    </div>
-                    <div className="status">
-                      <div>Attack: </div>
-                      <div>{data.stats[1].base_stat}</div>
-                    </div>
-                    <div className="status">
-                      <div>Defense: </div>
-                      <div>{data.stats[2].base_stat}</div>
-                    </div>
-                    <div className="status">
-                      <div>Sp Atk: </div>
-                      <div>{data.stats[3].base_stat}</div>
-                    </div>
-                    <div className="status">
-                      <div>Sp Def: </div>
-                      <div>{data.stats[4].base_stat}</div>
-                    </div>
-                    <div className="status">
-                      <div>Speed: </div>
-                      <div>{data.stats[5].base_stat}</div>
-                    </div>
-                  </div>
+
                 </div>
 
-                <div className="pokemon-profile">
-                  <h3>Profile</h3>
-                  <div className="status">
+                <div className="basic-data">
+                    <div className="status-container">
+                      <div className="status">
+                        <div>HP: </div>
+                        <div>{data.stats[0].base_stat}</div>
+                      </div>
+                      <div className="status">
+                        <div>Attack: </div>
+                        <div>{data.stats[1].base_stat}</div>
+                      </div>
+                      <div className="status">
+                        <div>Defense: </div>
+                        <div>{data.stats[2].base_stat}</div>
+                      </div>
+                      <div className="status">
+                        <div>Sp Atk: </div>
+                        <div>{data.stats[3].base_stat}</div>
+                      </div>
+                      <div className="status">
+                        <div>Sp Def: </div>
+                        <div>{data.stats[4].base_stat}</div>
+                      </div>
+                      <div className="status">
+                        <div>Speed: </div>
+                        <div>{data.stats[5].base_stat}</div>
+                      </div>
+                   </div>
+
+                  <div className="status-container">
+                    <div className="status">
                       <div>Type: </div>
-                      <div>
+                      <div className="status-details">
                           {data.types.map(type => (
                             <span key={type}>{type.type.name}&nbsp;</span>
                           ))}
                       </div>
+                    </div>
+                    <div className="status">
+                        <div>Height: </div>
+                        <div className="status-details">{Math.round(data.height) / 10} m</div>
+                    </div>
+                    <div className="status">
+                        <div>Weight: </div>
+                        <div className="status-details">{Math.round(data.weight) / 10} kg</div>
+                    </div>
+                    <div className="status">
+                        <div>Abilities: </div>
+                        <div className="status-details">
+                          {data.abilities.map(abilities => (
+                                <span key={abilities}>{abilities.ability.name}&nbsp;</span>
+                          ))}
+                        </div>
+                    </div>
                   </div>
-                  <div className="status">
-                      <div>Height: </div>
-                      <div>{Math.round(data.height) / 10} m</div>
-                  </div>
-                  <div className="status">
-                      <div>Weight: </div>
-                      <div>{Math.round(data.weight) / 10} kg</div>
-                  </div>
-                  <div className="status">
-                      <div>Abilities: </div>
-                      <div>
-                        {data.abilities.map(abilities => (
-                              <span key={abilities}>{abilities.ability.name}&nbsp;</span>
-                        ))}
-                      </div>
-                  </div>
+
                 </div>
-
-
               </div>
             </Card>
           </div>
