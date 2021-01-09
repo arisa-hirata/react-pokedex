@@ -32,6 +32,11 @@ body {
     margin: 20px;
 }
 
+.card-header{
+    display:flex;
+    flex-direction: row;
+}
+
 .pokemon-data {
 
 }
