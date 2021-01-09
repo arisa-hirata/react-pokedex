@@ -23,3 +23,37 @@ body {
     justify-content: center;
     margin: 20px;
 }
+
+.pokemon-container {
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.pokemon-data {
+
+}
+
+.basic-data {
+    display: flex;
+    flex-direction: row;
+    background-color: pink;
+}
+
+.image-container {
+    flex:1;
+}
+.status-container {
+    flex: 2;
+    flex-direction: colomn;
+    background-color: yellow;
+
+}
+
+.status {
+    display: flex;
+    flex-direction: row;
+    background-color: aliceblue;
+}
