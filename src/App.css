@@ -49,11 +49,14 @@ body {
     flex: 2;
     flex-direction: colomn;
     background-color: yellow;
-
 }
 
 .status {
     display: flex;
     flex-direction: row;
     background-color: aliceblue;
+}
+
+.status-details {
+    font-weight: 400;
 }
