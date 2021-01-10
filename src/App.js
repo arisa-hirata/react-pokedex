@@ -112,7 +112,6 @@ function App() {
       {pokemonData.map((data) => {
         const imageUrl = data.sprites;
         const themeColor = data.types[0].type.name;
-        console.log("data: ", data.types[0].type.name);
         return (
           <div className="pokemon-container">
             <Card
