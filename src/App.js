@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Grid, CircularProgress, Card, CardHeader, CardMedia,  } from '@material-ui/core';
+import { Button, TextField, CircularProgress, Card } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";
 import Header from './components/Header';
 import './App.css';
@@ -71,19 +72,28 @@ function App() {
   //     </Grid>
   //   );
   // }
-
+  console.log("autocompletion: ", pokemonData.map((data) => data.name));
   return (
     <div className="App">
       <Header />
       <div className="search_container">
-        <TextField
-          // {...params}
-          label="Search Pokemon"
-          margin="normal"
-          variant="filled"
-          onChange={handleSearchChange}
-          // InputProps={{ ...params.InputProps, type: 'search' }}
+        <Autocomplete
+          freeSolo
+          disableClearable
+          options={pokemonData.map((data) => data.name)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search Pokemon"
+              margin="normal"
+              variant="filled"
+              onChange={handleSearchChange}
+              InputProps={{ ...params.InputProps, type: 'search' }}
+              style={{width: 200}}
+            />
+          )}
         />
+
         <Button
           variant="contained"
           style={{ backgroundColor: '#e3350f', color: 'white', marginLeft: 20 }}
