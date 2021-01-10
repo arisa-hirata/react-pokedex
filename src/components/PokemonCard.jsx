@@ -3,7 +3,7 @@ import { CircularProgress, Card, Grid, CardMedia, CardContent, Typography } from
 import axios from "axios";
 
 const PokemonCard = () => {
-  const [pokemonData, setPokemonData] = useState({});
+   const [pokemonData, setPokemonData] = useState({});
 
     useEffect(() => {
       axios

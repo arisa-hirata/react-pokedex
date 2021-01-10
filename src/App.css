@@ -21,7 +21,7 @@ body {
     flex-direction: row;
     align-items:center;
     justify-content: center;
-    margin: 20px;
+    margin: 70px 0 20px 0;
 }
 
 .pokemon-container {
@@ -38,7 +38,7 @@ body {
     justify-content:space-between;
     background-color: #F7F7F7;
     border-bottom: 1px solid #E5E5E5;
-    padding: 0 20px 0 20px;
+    padding: 20px;
 }
 
 .pokemon-name {
@@ -61,7 +61,7 @@ body {
 }
 
 .pokemon-image {
-    width: 300px;
+    width: 200px;
 }
 
 .sprites-container {
@@ -83,7 +83,11 @@ body {
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    padding: 0 20px 0 20px;
+    padding: 5px 20px;
+}
+
+.progress {
+    width: 80%;
 }
 
 .status-details {

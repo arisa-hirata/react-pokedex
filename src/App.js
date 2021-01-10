@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, TextField, CircularProgress, Card } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, TextField, Card, LinearProgress, Divider } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";
 import Header from './components/Header';
@@ -40,7 +40,6 @@ function App() {
       const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
       const pokemonRes = await axios.get(pokemonUrl);
 
-      const types = pokemonRes.data.types.map(type => type.type.name);
       setTypeColor(typeColor)
       pokeArr.push(pokemonRes.data);
       setPokemonData(pokeArr);
@@ -48,6 +47,7 @@ function App() {
       console.log(e);
     }
   };
+
 
   const handleSearchChange = (e) => {
       setPokemon(e.target.value.toLowerCase());
@@ -58,8 +58,6 @@ function App() {
     getPokemonCard();
     setPokemonCards(!pokemonCards)
   }
-
-  console.log("pokemon: ", pokemonData.length);
 
   return (
     <div className="App">
@@ -92,8 +90,9 @@ function App() {
       </div>
 
       {pokemonData.map((data) => {
-        console.log("data: ", data);
         const imageUrl = data.sprites;
+        // const types = data.types.map(type => { type.nams });
+        // const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
 
         return (
           <div className="pokemon-container">
@@ -104,11 +103,11 @@ function App() {
                 minWidth: 500,
               }}>
               <div className="card-header">
-                <h4># {data.id}</h4>
+                <h5># {data.id}</h5>
                 <h3 className="pokemon-name">
                   {data.name.split(' ').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}
                 </h3>
-                <h4>
+                <h5>
                   Type: &nbsp;
                   {data.types.map(type => (
                     <span
@@ -121,58 +120,145 @@ function App() {
                       }}
                     >{type.type.name}</span>
                   ))}
-
-                </h4>
+                </h5>
               </div>
+
               <div className="pokemon-data">
 
                 <div className="basic-data">
                   <div className="image-container">
                       <img className="pokemon-image" src={imageUrl.front_default} />
                   </div>
-                  <div className="sprites-container">
-                    <div>
-                      <img className="sprites-image" src={imageUrl.front_female} />
-                      <img className="sprites-image" src={imageUrl.back_female} />
-                    </div>
-                    <div>
-                      <img className="sprites-image" src={imageUrl.front_shiny} />
-                      <img className="sprites-image" src={imageUrl.back_shiny} />
-                    </div>
-                  </div>
+
+                  <div className="status-container">
+
+                    {data.types.map(type => (
+                      <div>
+
+                        <div className="status">
+                          <div>HP </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[0].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[0].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div className="status">
+                          <div>Attack </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[1].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[1].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div className="status">
+                          <div>Defense </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[2].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[2].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div className="status">
+                          <div>Sp Atk </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[3].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[3].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div className="status">
+                          <div>Sp Def </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[4].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[4].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div className="status">
+                          <div>Speed </div>
+                          <div key={type} className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{
+                                  width: `${data.stats[5].base_stat}%`,
+                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                }}
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                <small>{data.stats[5].base_stat}</small>
+                              </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    ))}
+                   </div>
 
                 </div>
 
                 <div className="basic-data">
-                    <div className="status-container">
-                      <div className="status">
-                        <div>HP: </div>
-                        <div className="status-details">{data.stats[0].base_stat}</div>
-                      </div>
-                      <div className="status">
-                        <div>Attack: </div>
-                        <div className="status-details">{data.stats[1].base_stat}</div>
-                      </div>
-                      <div className="status">
-                        <div>Defense: </div>
-                        <div className="status-details">{data.stats[2].base_stat}</div>
-                      </div>
-                      <div className="status">
-                        <div>Sp Atk: </div>
-                        <div className="status-details">{data.stats[3].base_stat}</div>
-                      </div>
-                      <div className="status">
-                        <div>Sp Def: </div>
-                        <div className="status-details">{data.stats[4].base_stat}</div>
-                      </div>
-                      <div className="status">
-                        <div>Speed: </div>
-                        <div className="status-details">{data.stats[5].base_stat}</div>
-                      </div>
-                   </div>
+
 
                   <div className="status-container">
-
                     <div className="status">
                         <div>Height: </div>
                         <div className="status-details">{Math.round(data.height) / 10} m</div>
@@ -191,6 +277,16 @@ function App() {
                     </div>
                   </div>
                 </div>
+                <div className="sprites-container">
+                    <div>
+                      <img className="sprites-image" src={imageUrl.front_female} />
+                      <img className="sprites-image" src={imageUrl.back_female} />
+                    </div>
+                    <div>
+                      <img className="sprites-image" src={imageUrl.front_shiny} />
+                      <img className="sprites-image" src={imageUrl.back_shiny} />
+                    </div>
+                  </div>
               </div>
             </Card>
           </div>
