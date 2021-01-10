@@ -26,7 +26,7 @@ const PokemonCard = () => {
     }, []);
 
   const getPokemonCard = (pokemonId) => {
-      const { id, name, sprite } = pokemonData[pokemonId];
+    const { id, name, sprite } = pokemonData[pokemonId];
       return (
         <Grid item xs={4} key={pokemonId}>
           <Card>

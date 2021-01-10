@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, TextField, Card, LinearProgress, Divider } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, Card } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";
 import Header from './components/Header';
@@ -31,7 +31,7 @@ function App() {
   const [pokemon, setPokemon] = useState("");
   const [pokemonData, setPokemonData] = useState([]);
   const [typeColor, setTypeColor] = useState("");
-  const [pokemonCards, setPokemonCards] = useState(true);
+  const [pokemonName, setPokemonName] = useState([]);
 
   const getPokemonCard = async () => {
     const pokeArr = [];
@@ -48,15 +48,34 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=807`)
+      .then(function (response) {
+        const { data } = response;
+        const { results } = data;
+        const newPokemonData = [];
+        results.forEach((pokemon, index) => {
+          newPokemonData[index + 1] = {
+            id: index + 1,
+            name: pokemon.name,
+          };
+        });
+        setPokemonName(newPokemonData);
+      });
+  }, []);
 
-  const handleSearchChange = (e) => {
-      setPokemon(e.target.value.toLowerCase());
+  const handleSearchChange = (e, newValue) => {
+    if (typeof newValue === 'string') {
+      setPokemon(newValue);
+    } else {
+      setPokemon(e.target.value);
+    }
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
     getPokemonCard();
-    setPokemonCards(!pokemonCards)
   }
 
   return (
@@ -66,9 +85,11 @@ function App() {
         <Autocomplete
           freeSolo
           disableClearable
-          options={pokemonData.map((data) => data.name)}
+          options={pokemonName.map((option) => option.name)}
+          onChange={handleSearchChange}
           renderInput={(params) => (
             <TextField
+              required={true}
               {...params}
               label="Search Pokemon"
               margin="normal"
@@ -79,7 +100,6 @@ function App() {
             />
           )}
         />
-
         <Button
           variant="contained"
           style={{ backgroundColor: '#e3350f', color: 'white', marginLeft: 20 }}
@@ -91,9 +111,7 @@ function App() {
 
       {pokemonData.map((data) => {
         const imageUrl = data.sprites;
-        // const types = data.types.map(type => { type.nams });
-        // const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
-
+        const themeColor = data.types[0].type.name;
         return (
           <div className="pokemon-container">
             <Card
@@ -131,19 +149,16 @@ function App() {
                   </div>
 
                   <div className="status-container">
-
-                    {data.types.map(type => (
                       <div>
-
                         <div className="status">
                           <div>HP </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[0].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -156,13 +171,13 @@ function App() {
 
                         <div className="status">
                           <div>Attack </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[1].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -175,13 +190,13 @@ function App() {
 
                         <div className="status">
                           <div>Defense </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[2].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -194,13 +209,13 @@ function App() {
 
                         <div className="status">
                           <div>Sp Atk </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[3].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -213,13 +228,13 @@ function App() {
 
                         <div className="status">
                           <div>Sp Def </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[4].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -232,13 +247,13 @@ function App() {
 
                         <div className="status">
                           <div>Speed </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[5].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -248,16 +263,11 @@ function App() {
                               </div>
                           </div>
                         </div>
-
                       </div>
-                    ))}
                    </div>
-
                 </div>
 
                 <div className="basic-data">
-
-
                   <div className="status-container">
                     <div className="status">
                         <div>Height: </div>
@@ -281,8 +291,6 @@ function App() {
                     <div>
                       <img className="sprites-image" src={imageUrl.front_female} />
                       <img className="sprites-image" src={imageUrl.back_female} />
-                    </div>
-                    <div>
                       <img className="sprites-image" src={imageUrl.front_shiny} />
                       <img className="sprites-image" src={imageUrl.back_shiny} />
                     </div>
@@ -292,7 +300,8 @@ function App() {
           </div>
         );
       })}
-      {pokemonData.length === 0 ? <PokemonCard /> : "" }
+      {pokemonData.length === 0 ? <PokemonCard /> : ""}
+
 
     </div>
   );

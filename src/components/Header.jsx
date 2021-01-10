@@ -8,12 +8,9 @@ const Header = () => {
         className="navbar navbar-expand-md fixed-top"
         style={{
           backgroundColor: '#e3350f',
-          height: 60,
-          width: "100%",
           justifyContent: 'center',
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'row'
         }}>
         <a
           href="/"
