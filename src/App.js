@@ -3,6 +3,7 @@ import { Button, TextField, CircularProgress, Card } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";
 import Header from './components/Header';
+import PokemonCard from './components/PokemonCard';
 import './App.css';
 
 const TYPE_COLORS = {
@@ -64,15 +65,7 @@ function App() {
     getPokemonCard();
   }
 
-  // const getPokemonCard = (pokemonId) => {
-  //   const { id, name, sprite } = pokemonData[pokemonId];
-  //   return (
-  //     <Grid item xs={4} key={pokemonId}>
-
-  //     </Grid>
-  //   );
-  // }
-  console.log("autocompletion: ", pokemonData.map((data) => data.name));
+  console.log("autocompletion: ", );
   return (
     <div className="App">
       <Header />
@@ -102,7 +95,7 @@ function App() {
           Search
         </Button>
       </div>
-
+      {pokemonData ? "pokedata!": "none!"}
       {pokemonData.map((data) => {
         console.log("data: ", data.sprites);
         const imageUrl = data.sprites;
@@ -201,6 +194,7 @@ function App() {
                           ))}
                         </div>
                     </div>
+
                   </div>
 
                 </div>
@@ -210,6 +204,7 @@ function App() {
 
         );
       })}
+      <PokemonCard />
     </div>
   );
 }
