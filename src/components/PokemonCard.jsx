@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, Card, Grid, CardMedia, CardContent, Typography } from '@material-ui/core';
+import { CircularProgress, Card, Grid, CardContent, Typography } from '@material-ui/core';
 import axios from "axios";
 
 const PokemonCard = () => {
