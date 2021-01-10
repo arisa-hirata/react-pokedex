@@ -31,7 +31,6 @@ function App() {
   const [pokemon, setPokemon] = useState("");
   const [pokemonData, setPokemonData] = useState([]);
   const [typeColor, setTypeColor] = useState("");
-  const [pokemonCards, setPokemonCards] = useState(true);
 
   const getPokemonCard = async () => {
     const pokeArr = [];
@@ -56,7 +55,6 @@ function App() {
   const handleSearch = (e) => {
     e.preventDefault();
     getPokemonCard();
-    setPokemonCards(!pokemonCards)
   }
 
   return (
@@ -91,9 +89,8 @@ function App() {
 
       {pokemonData.map((data) => {
         const imageUrl = data.sprites;
-        // const types = data.types.map(type => { type.nams });
-        // const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
-
+        const themeColor = data.types[0].type.name;
+        console.log("data: ", data.types[0].type.name);
         return (
           <div className="pokemon-container">
             <Card
@@ -131,19 +128,16 @@ function App() {
                   </div>
 
                   <div className="status-container">
-
-                    {data.types.map(type => (
                       <div>
-
                         <div className="status">
                           <div>HP </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[0].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -156,13 +150,13 @@ function App() {
 
                         <div className="status">
                           <div>Attack </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[1].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -175,13 +169,13 @@ function App() {
 
                         <div className="status">
                           <div>Defense </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[2].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -194,13 +188,13 @@ function App() {
 
                         <div className="status">
                           <div>Sp Atk </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[3].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -213,13 +207,13 @@ function App() {
 
                         <div className="status">
                           <div>Sp Def </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[4].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -232,13 +226,13 @@ function App() {
 
                         <div className="status">
                           <div>Speed </div>
-                          <div key={type} className="progress">
+                          <div  className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
                                 style={{
                                   width: `${data.stats[5].base_stat}%`,
-                                  backgroundColor: `#${TYPE_COLORS[type.type.name]}`
+                                  backgroundColor: `#${TYPE_COLORS[themeColor]}`
                                 }}
                                 aria-valuenow="25"
                                 aria-valuemin="0"
@@ -250,14 +244,12 @@ function App() {
                         </div>
 
                       </div>
-                    ))}
+
                    </div>
 
                 </div>
 
                 <div className="basic-data">
-
-
                   <div className="status-container">
                     <div className="status">
                         <div>Height: </div>
@@ -281,8 +273,6 @@ function App() {
                     <div>
                       <img className="sprites-image" src={imageUrl.front_female} />
                       <img className="sprites-image" src={imageUrl.back_female} />
-                    </div>
-                    <div>
                       <img className="sprites-image" src={imageUrl.front_shiny} />
                       <img className="sprites-image" src={imageUrl.back_shiny} />
                     </div>
