@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, Card, Grid, CardMedia, CardContent, Typography } from '@material-ui/core';
+import { CircularProgress, Card, Grid, CardContent, Typography } from '@material-ui/core';
 import axios from "axios";
 
 const PokemonCard = () => {
@@ -13,7 +13,7 @@ const PokemonCard = () => {
           const { results } = data;
           const newPokemonData = {};
           results.forEach((pokemon, index) => {
-            newPokemonData[Math.floor(Math.random() * 9)] = {
+            newPokemonData[Math.floor(Math.random() * 12)] = {
               id: index + 1,
               name: pokemon.name.split(' ').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(' '),
               sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -28,14 +28,31 @@ const PokemonCard = () => {
   const getPokemonCard = (pokemonId) => {
     const { id, name, sprite } = pokemonData[pokemonId];
       return (
-        <Grid item xs={4} key={pokemonId}>
+        <Grid
+          item
+          xs={3}
+          key={pokemonId}
+          spacing={1}
+        >
           <Card>
-            <CardMedia
-              image={sprite}
-              style={{ width: "150px", height: "150px"}}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <img
+              src={sprite}
+              style={{width: 200,height: 200,
+              }}
             />
-            <CardContent>
-              <Typography>{`#${id}  ${name}`}</Typography>
+            </div>
+
+            <CardContent style={{backgroundColor: "#F7F7F7"}}>
+              <Typography>
+                {`#${id}  ${name}`}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>

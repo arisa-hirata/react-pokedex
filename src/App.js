@@ -67,9 +67,11 @@ function App() {
 
   const handleSearchChange = (e, newValue) => {
     if (typeof newValue === 'string') {
-      setPokemon(newValue);
+      setPokemon(newValue.toLowerCase());
+    } else if (newValue && newValue.inputValue) {
+      setPokemon(newValue.inputValue.toLowerCase());
     } else {
-      setPokemon(e.target.value);
+      setPokemon(e.target.value.toLowerCase());
     }
   };
 
