@@ -35,31 +35,55 @@ body {
 .card-header{
     display:flex;
     flex-direction: row;
+    justify-content:space-between;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 0 20px 0 20px;
+}
+
+.pokemon-name {
+    font-size: 30px;
 }
 
 .pokemon-data {
-
+    margin: 20px;
+    line-height: 1.5;
 }
 
 .basic-data {
     display: flex;
     flex-direction: row;
-    background-color: pink;
+    border-bottom: 1px solid #E5E5E5;
 }
 
 .image-container {
     flex:1;
 }
+
+.pokemon-image {
+    width: 300px;
+}
+
+.sprites-container {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.sprites-image {
+    width: 100px;
+}
+
 .status-container {
     flex: 2;
     flex-direction: colomn;
-    background-color: yellow;
 }
 
 .status {
     display: flex;
     flex-direction: row;
-    background-color: aliceblue;
+    justify-content:space-between;
+    padding: 0 20px 0 20px;
 }
 
 .status-details {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Grid, CircularProgress, Card, CardHeader, CardMedia } from '@material-ui/core';
+import { Button, TextField, Grid, CircularProgress, Card, CardHeader, CardMedia,  } from '@material-ui/core';
 import axios from "axios";
 import Header from './components/Header';
 import './App.css';
@@ -94,8 +94,8 @@ function App() {
       </div>
 
       {pokemonData.map((data) => {
-        console.log("data: ", data);
-        const imageUrl = data.sprites.front_default;
+        console.log("data: ", data.sprites);
+        const imageUrl = data.sprites;
 
         return (
           <div className="pokemon-container">
@@ -104,32 +104,43 @@ function App() {
                 width: "70%",
                 maxWidth: 1000,
                 minWidth: 500,
-                height: 500
               }}>
               <div className="card-header">
-                <h5># {data.id}</h5>
-                <h3>
+                <h4># {data.id}</h4>
+                <h3 className="pokemon-name">
                   {data.name.split(' ').map(s => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}
                 </h3>
-                <div>
+                <h4>
                   Type: &nbsp;
                   {data.types.map(type => (
                     <span
                       key={type}
                       style={{
                         backgroundColor: `#${TYPE_COLORS[type.type.name]}`,
-                        color: 'white'
+                        color: 'white',
+                        borderRadius: 5,
+                        padding: 5
                       }}
-                    >{type.type.name}&nbsp;</span>
+                    >{type.type.name}</span>
                   ))}
 
-                </div>
+                </h4>
               </div>
               <div className="pokemon-data">
 
                 <div className="basic-data">
                   <div className="image-container">
-                     <img className="pokemon-image" src={imageUrl} />
+                      <img className="pokemon-image" src={imageUrl.front_default} />
+                  </div>
+                  <div className="sprites-container">
+                    <div>
+                      <img className="sprites-image" src={imageUrl.front_female} />
+                      <img className="sprites-image" src={imageUrl.back_female} />
+                    </div>
+                    <div>
+                      <img className="sprites-image" src={imageUrl.front_shiny} />
+                      <img className="sprites-image" src={imageUrl.back_shiny} />
+                    </div>
                   </div>
 
                 </div>
@@ -163,14 +174,7 @@ function App() {
                    </div>
 
                   <div className="status-container">
-                    <div className="status">
-                      <div>Type: </div>
-                      <div className="status-details">
-                          {data.types.map(type => (
-                            <span key={type}>{type.type.name}&nbsp;</span>
-                          ))}
-                      </div>
-                    </div>
+
                     <div className="status">
                         <div>Height: </div>
                         <div className="status-details">{Math.round(data.height) / 10} m</div>
