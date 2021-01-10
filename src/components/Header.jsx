@@ -9,6 +9,7 @@ const Header = () => {
         style={{
           backgroundColor: '#e3350f',
           height: 60,
+          width: "100%",
           justifyContent: 'center',
           display: 'flex',
           alignItems: 'center',

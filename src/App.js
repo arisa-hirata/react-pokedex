@@ -3,6 +3,7 @@ import { Button, TextField, CircularProgress, Card } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";
 import Header from './components/Header';
+import PokemonCard from './components/PokemonCard';
 import './App.css';
 
 const TYPE_COLORS = {
@@ -27,12 +28,10 @@ const TYPE_COLORS = {
 };
 
 function App() {
-  // const [pokemon, setPokemon] = useState("");
-  // const [pokemonData, setPokemonData] = useState({});
   const [pokemon, setPokemon] = useState("");
   const [pokemonData, setPokemonData] = useState([]);
-  const [pokemonType, setPokemonType] = useState("");
   const [typeColor, setTypeColor] = useState("");
+  const [pokemonCards, setPokemonCards] = useState(true);
 
   const getPokemonCard = async () => {
     const pokeArr = [];
@@ -41,14 +40,9 @@ function App() {
       const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
       const pokemonRes = await axios.get(pokemonUrl);
 
-      const imageUrl = pokemonRes.data.sprites.front_default;
       const types = pokemonRes.data.types.map(type => type.type.name);
-      const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
-      console.log("themeColor: ", themeColor);
       setTypeColor(typeColor)
-      // console.log(pokemonRes.data);
       pokeArr.push(pokemonRes.data);
-      // setPokemonType(pokemonRes.data.types[0].type.name);
       setPokemonData(pokeArr);
     } catch (e) {
       console.log(e);
@@ -62,17 +56,11 @@ function App() {
   const handleSearch = (e) => {
     e.preventDefault();
     getPokemonCard();
+    setPokemonCards(!pokemonCards)
   }
 
-  // const getPokemonCard = (pokemonId) => {
-  //   const { id, name, sprite } = pokemonData[pokemonId];
-  //   return (
-  //     <Grid item xs={4} key={pokemonId}>
+  console.log("pokemon: ", pokemonData.length);
 
-  //     </Grid>
-  //   );
-  // }
-  console.log("autocompletion: ", pokemonData.map((data) => data.name));
   return (
     <div className="App">
       <Header />
@@ -104,7 +92,7 @@ function App() {
       </div>
 
       {pokemonData.map((data) => {
-        console.log("data: ", data.sprites);
+        console.log("data: ", data);
         const imageUrl = data.sprites;
 
         return (
@@ -202,14 +190,14 @@ function App() {
                         </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </Card>
           </div>
-
         );
       })}
+      {pokemonData.length === 0 ? <PokemonCard /> : "" }
+
     </div>
   );
 }
