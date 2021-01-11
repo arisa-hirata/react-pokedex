@@ -1,6 +1,6 @@
-# Pokedex
+# Pokédex
 A simple Pokémon searching app.
-![pokedex](https://user-images.githubusercontent.com/32582917/104144655-f6661c00-5378-11eb-95c2-7475cc3dd376.gif)
+![pokedex](https://user-images.githubusercontent.com/32582917/104144655-f6661c00-5378-11eb-95c2-7475cc3dd376.gif =500x)
 
 [DEMO](https://arisahirata-pokedex.netlify.app/)
 
